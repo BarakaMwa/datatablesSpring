@@ -8,7 +8,7 @@
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.datatables.DatatablesApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="LaunchBrowser.Before.Run" url="localhost:8083" />
+      <option name="LaunchBrowser.Before.Run" url="http://localhost:8083" />
     </method>
   </configuration>
 </component>

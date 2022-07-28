@@ -1,2 +1,21 @@
-package com.example.datatables.models;public class Column {
+package com.example.datatables.models;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
+public class Column {
+
+    private String data;
+    private String name;
+    private Boolean searchable;
+    private Boolean orderable;
+    private Search search;
+
+    public Column(String data) {
+        this.data = data;
+    }
 }

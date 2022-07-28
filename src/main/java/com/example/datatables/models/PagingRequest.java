@@ -1,15 +1,15 @@
 package com.example.datatables.models;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
 @Setter
 @Getter
-@Data
-public class PagingRequestDto {
+@NoArgsConstructor
+public class PagingRequest {
 
     private int start;
     private int length;

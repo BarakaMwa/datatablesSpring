@@ -109,14 +109,11 @@
             <div class="row">
                 <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
 
-                    <h1 class="mbr-section-title display-1">FULL SCREEN INTRO</h1>
+                    <h1 class="mbr-section-title display-1" th:text="${pageName}"></h1>
                     <p class="mbr-section-lead lead">Click any text to edit or style it. Click blue "Gear" icon in the
                         top right corner to hide/show buttons, text, title and change the block background. <br> Click
                         red "+" in the bottom right corner to add a new block. Use the top left menu to create new
                         pages, sites and add extensions.</p>
-                    <div class="mbr-section-btn"><a class="btn btn-lg btn-primary" href="https://mobirise.com">DOWNLOAD
-                        FOR WINDOWS</a> <a class="btn btn-lg btn-white btn-white-outline" href="https://mobirise.com">DOWNLOAD
-                        FOR MAC</a></div>
                 </div>
             </div>
         </div>
@@ -128,26 +125,7 @@
 </section>
 
 <section class="mbr-cards mbr-section container table-responsive" id="features3-4"
-         style="background-color: rgb(255, 255, 255);">
-
-
-    <table id="example" class="table" style="width:100%">
-        <thead>
-        <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Last Update</th>
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Last Update</th>
-        </tr>
-        </tfoot>
-    </table>
-</section>
+         style="background-color: rgb(255, 255, 255);"></section>
 
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
@@ -164,28 +142,6 @@
 <script src="assets/datatables/dataTables.bootstrap.min.js"></script>
 <input name="animation" type="hidden">
 
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                "url": "/api/getActors",
-                "type": "POST",
-                "dataType": "json",
-                "contentType": "application/json",
-                "data": function (d) {
-                    return JSON.stringify(d);
-                }
-            },
-            columns: [
-                {data: 'firstName'},
-                {data: 'lastName'},
-                {data: 'lastUpdate'},
-            ],
-        });
-    });
-</script>
 <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a>
 </div>
 </body>

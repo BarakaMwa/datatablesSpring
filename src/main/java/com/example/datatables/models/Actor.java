@@ -1,17 +1,32 @@
 package com.example.datatables.models;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 @Getter
-@Data
 @Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "actor", schema = "sakila")
 public class Actor {
 
-  private long actorId;
-  private String firstName;
-  private String lastName;
-  private java.sql.Timestamp lastUpdate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "actor_id", nullable = false)
+    private long actorId;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "last_update", nullable = false)
+    private java.sql.Timestamp lastUpdate;
 
 }
