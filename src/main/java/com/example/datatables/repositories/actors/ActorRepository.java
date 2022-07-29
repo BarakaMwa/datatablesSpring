@@ -1,6 +1,6 @@
-package com.example.datatables.repositories;
+package com.example.datatables.repositories.actors;
 
-import com.example.datatables.models.Actor;
+import com.example.datatables.models.actors.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

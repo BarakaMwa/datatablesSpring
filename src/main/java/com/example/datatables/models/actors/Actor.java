@@ -1,4 +1,4 @@
-package com.example.datatables.models;
+package com.example.datatables.models.actors;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

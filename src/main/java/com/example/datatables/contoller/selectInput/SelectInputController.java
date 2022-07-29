@@ -1,4 +1,4 @@
-package com.example.datatables.contoller;
+package com.example.datatables.contoller.selectInput;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SelectInputController {
 
     @GetMapping("/input")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="Sever Side Select Input") String pageName, Model model) {
+    public String select(@RequestParam(name="name", required=false, defaultValue="Sever Side Select Input") String pageName, Model model) {
         model.addAttribute("pageName", pageName);
         return "selectInput";
     }

@@ -1,4 +1,4 @@
-package com.example.datatables.contoller;
+package com.example.datatables.contoller.jasperReports;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class JasperReportsController {
 
     @GetMapping("/reports")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="Jasper Reports") String pageName, Model model) {
+    public String reports(@RequestParam(name="name", required=false, defaultValue="Jasper Reports") String pageName, Model model) {
         model.addAttribute("pageName", pageName);
         return "jasperreport";
     }

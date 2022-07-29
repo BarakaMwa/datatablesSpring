@@ -1,7 +1,9 @@
-package com.example.datatables.services;
+package com.example.datatables.services.actors;
 
-import com.example.datatables.models.*;
-import com.example.datatables.repositories.ActorRepository;
+import com.example.datatables.models.actors.Actor;
+import com.example.datatables.models.actors.ActorComparators;
+import com.example.datatables.models.search.*;
+import com.example.datatables.repositories.actors.ActorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

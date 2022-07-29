@@ -1,9 +1,10 @@
-package com.example.datatables.models;
+package com.example.datatables.models.actors;
 
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.example.datatables.models.search.Direction;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
