@@ -1,4 +1,4 @@
-package com.example.datatables.contoller.actors;
+package com.example.datatables.apis;
 
 import com.example.datatables.models.actors.Actor;
 import com.example.datatables.models.search.Page;
