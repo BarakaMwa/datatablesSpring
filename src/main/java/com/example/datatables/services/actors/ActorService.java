@@ -77,12 +77,10 @@ public class ActorService {
 
         return actor -> actor.getFirstName()
                 .toLowerCase()
-                .contains(value)
+                .contains(value.toLowerCase())
                 || actor.getLastName()
                 .toLowerCase()
-                .contains(value)
-                || actor.getLastUpdate().toString().toLowerCase()
-                .contains(value);
+                .contains(value.toLowerCase());
     }
 
     private Comparator<? super Actor> sortActors(PagingRequest request) {

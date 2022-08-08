@@ -9,6 +9,4 @@ import org.springframework.stereotype.Controller;
 @RequestMapping({"/"})
 public class MainController {
 
-
-
 }
