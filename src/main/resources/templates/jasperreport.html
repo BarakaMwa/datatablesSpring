@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/assets/images/logo.png" type="image/x-icon">
     <meta name="description" content="">
-    <title th:text="${pageName}" ></title>
+    <title th:text="${pageName}"></title>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
@@ -38,7 +38,7 @@
 
                     <div class="navbar-brand">
                         <a href="/" class="navbar-logo"><img src="/assets/images/logo.png"
-                                                                                alt="#"></a>
+                                                             alt="#"></a>
                         <a class="navbar-caption" href="/">Home</a>
                     </div>
 
@@ -54,13 +54,13 @@
                         id="exCollapsingNavbar">
                         <li class="nav-item"><a class="nav-link link" href="/actor/dataTable/">DataTables</a></li>
                         <li class="nav-item">
-                            <a class="nav-link link" href="/file/index" >Files</a>
+                            <a class="nav-link link" href="/file/index">Files</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link" href="/select/input" >Select Input</a>
+                            <a class="nav-link link" href="/select/input">Select Input</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link link" href="/jasper/reports" >Jasper Reports</a>
+                            <a class="nav-link link" href="/jasper/reports">Jasper Reports</a>
                         </li>
                     </ul>
                     <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse"
@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
 
-                    <p class="mbr-section-title display-1" th:text="${pageName}"> </p>
+                    <p class="mbr-section-title display-1" th:text="${pageName}"></p>
 
                 </div>
             </div>
@@ -100,7 +100,26 @@
 </section>
 
 <section class="mbr-cards mbr-section container table-responsive" id="features3-4"
-         style="background-color: rgb(255, 255, 255);"></section>
+         style="background-color: rgb(255, 255, 255);">
+
+    <form id="actorsJasperForm" class="needs-validation">
+        <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" id="firstName" name="firstName" type="text" placeholder="First Name" required
+                   maxlength="15">
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" id="lastName" name="lastName" text="text" placeholder="Last Name" required
+                   maxlength="15">
+        </div>
+        <div class="form-group">
+            <button type="submit" value="Generate Jasper Report" class="btn btn-sm btn-success">Generate Jasper Report
+            </button>
+        </div>
+    </form>
+
+</section>
 
 
 <script src="/assets/web/assets/jquery/jquery.min.js"></script>
@@ -116,7 +135,59 @@
 <script src="/assets/datatables/jquery.dataTables.min.js"></script>
 <script src="/assets/datatables/dataTables.bootstrap.min.js"></script>
 <input name="animation" type="hidden">
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
 
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+<script>
+    $("#actorsJasperForm").on("submit", function (e) {
+        e.preventDefault()
+        var form = $(this);
+        if (!form[0].checkValidity()) {
+
+            form[0].classList.add('was-validated')
+        } else {
+            form[0].classList.add('was-validated')
+            var data = new FormData(this);
+            console.log(data);
+            $.ajax({
+                url: "/jasper/reports/actors",
+                data: data,
+                type: "post",
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            })
+        }
+
+
+    })
+</script>
 <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a>
 </div>
 </body>

@@ -108,7 +108,7 @@
             <select type="text" class="form-control" id="search-actors-select">
             </select>
         </div>
-<!--        <button type="submit" class="btn btn-default">Submit</button>-->
+        <!--        <button type="submit" class="btn btn-default">Submit</button>-->
     </form>
 </section>
 
@@ -133,12 +133,76 @@
     $(document).ready(function () {
         $('#search-actors-select').select2({
             ajax: {
-                url: 'https://api.github.com/search/repositories',
-                dataType: 'json'
-                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-            }
+                url: '/api/getActorsSelectList',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    }
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Search for a Actor',
+            minimumInputLength: 4,
+            templateResult: formatRepo,
+            templateSelection: formatRepoSelection
         });
     });
+
+    function formatRepo(repo) {
+        console.log(repo);
+        if (repo.loading) {
+            return repo.text;
+            console.log(repo);
+        }
+
+        var $container = $(
+            "<div class='select2-result-repository clearfix' role='button' >" +
+            "<div class='select2-result-repository__avatar'>" +
+            "<div class='select2-result-repository__meta'>" +
+            "<div class='select2-result-repository__title'></div>" +
+            "<button class='select2-result-repository__value' hidden value></button>" +
+            "<div class='select2-result-repository__statistics'>" +
+            "</div>" +
+            "</div>" +
+            "</div>"
+        );
+
+        $container.find(".select2-result-repository__title").text(repo.firstName + " " + repo.lastName);
+        $container.find(".select2-result-repository__value").text(repo.actorId);
+        $container.find(".select2-result-repository__value").val(repo.actorId);
+
+        return $container;
+    }
+
+    function formatRepoSelection(repo) {
+        console.log(repo);
+        return repo.actorId
+    }
+
+    $('.select2-result-repository').on('click', function (e) {
+
+        alert("clicked");
+
+        let ele = this.find(".select2-result-repository__value");
+        console.log(ele.val());
+    })
 </script>
 <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon"></i></a>
 </div>

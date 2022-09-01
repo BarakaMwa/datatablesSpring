@@ -1,18 +1,18 @@
 package com.example.datatables.services.actors;
 
+import com.example.datatables.dtos.ActorIdFirstLastDto;
 import com.example.datatables.models.actors.Actor;
 import com.example.datatables.models.actors.ActorComparators;
 import com.example.datatables.models.search.*;
 import com.example.datatables.repositories.actors.ActorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -67,8 +67,7 @@ public class ActorService {
     }
 
     private Predicate<? super Actor> filterActors(PagingRequest request) {
-        if (request.getSearch() == null || StringUtils.isEmpty(request.getSearch()
-                .getValue())) {
+        if (request.getSearch() == null || "".equalsIgnoreCase(request.getSearch().getValue())) {
             return actor -> true;
         }
 
@@ -132,4 +131,49 @@ public class ActorService {
     private List<String> toStringList(Actor actor) {
         return Arrays.asList(actor.getFirstName(), actor.getLastName(), sdf.format(actor.getLastUpdate()));
     }
+
+    public Map<String, Object> getActorsSelectList(HttpServletRequest request) {
+
+        HashMap<String, Object> response = new HashMap<>();
+        List<Actor> actors;
+
+        if (Objects.nonNull(request.getParameter("q"))) {
+            String searchValue = request.getParameter("q");
+  /*          actors = actorRepository.findTop100ByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(searchValue, searchValue);
+            actors = actorRepository.findAllByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(searchValue, searchValue, PageRequest.of(0, 100));*/
+            List<ActorIdFirstLastDto> actorDtos = actorRepository.getByFirstOrLastAndId(searchValue, searchValue, PageRequest.of(0, 100));
+            actors = mapDtoToActorModel(actorDtos);
+
+        }else{
+            actors = actorRepository.findTop100ByActorIdIsNotNull();
+        }
+
+        actors = actors.stream()
+                .limit(10)
+                .collect(Collectors.toList());
+
+        response.put("items", actors);
+        response.put("total_count", actors.size());
+        response.put("incomplete_results", true);
+
+        return response;
+
+    }
+
+    private List<Actor> mapDtoToActorModel(List<ActorIdFirstLastDto> actorDtos) {
+        List<Actor> actors = new ArrayList<>();
+        for (ActorIdFirstLastDto item : actorDtos) {
+            Actor actor = new Actor();
+
+            actor.setActorId(item.getId());
+            actor.setFirstName(item.getFirstName());
+            actor.setLastName(item.getLastName());
+
+            actors.add(actor);
+        }
+
+
+        return actors;
+    }
+
 }

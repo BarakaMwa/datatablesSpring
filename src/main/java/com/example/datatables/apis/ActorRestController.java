@@ -26,6 +26,7 @@ public class ActorRestController {
         return actorService.getActors(request);
     }
 
+
     @PostMapping("/array")
     @ResponseBody
     public PageArray array(@RequestBody PagingRequest request) {

@@ -25,6 +25,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.20.0</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -50,7 +57,6 @@
             <artifactId>spring-native</artifactId>
             <version>${spring-native.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -117,6 +123,45 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>2.6.4</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.carlosthe19916</groupId>
+            <artifactId>jasper-utils</artifactId>
+            <version>1.0.6.Final</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.estefanoshin</groupId>
+            <artifactId>jasper-compiler</artifactId>
+            <version>1.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xifix.maven</groupId>
+            <artifactId>jasperreport-maven-plugin</artifactId>
+            <version>0.0.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ar.com.fdvs</groupId>
+            <artifactId>DynamicJasper</artifactId>
+            <version>5.3.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>glassfish.jasper</groupId>
+            <artifactId>jasper-jsr199</artifactId>
+            <version>9.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -141,8 +186,8 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.springframework.restdocs</groupId>
-                        <artifactId>spring-restdocs-asciidoctor</artifactId>
-                        <version>${spring-restdocs.version}</version>
+                        <artifactId>spring-restdocs-core</artifactId>
+                        <version>2.0.6.RELEASE</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -168,7 +213,7 @@
             <plugin>
                 <groupId>org.springframework.experimental</groupId>
                 <artifactId>spring-aot-maven-plugin</artifactId>
-                <version>${spring-native.version}</version>
+                <version>0.11.5</version>
                 <executions>
                     <execution>
                         <id>test-generate</id>
@@ -246,7 +291,7 @@
                     <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
-                        <version>${native-buildtools.version}</version>
+                        <version>0.9.11</version>
                         <extensions>true</extensions>
                         <executions>
                             <execution>
